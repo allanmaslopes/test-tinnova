@@ -139,7 +139,7 @@ public class CarServiceImpl implements CarService{
         } else {
             Optional<Car> car = carsRepository.findById(carId);
             if (car.isPresent()) {
-                return !car.get().getPlate().equals(plate);
+                return car.get().getPlate().equals(plate);
             } else {
                 return true;
             }

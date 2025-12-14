@@ -115,8 +115,8 @@ public class CarsController {
         try {
             CarDetailsDTO responseCar = carService.update(car);
             return ResponseEntity.created(null).body(responseCar);
-        } catch (Exception ex) {
-            return ResponseEntity.internalServerError().body(ex.getMessage());
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
         }
 
     }
