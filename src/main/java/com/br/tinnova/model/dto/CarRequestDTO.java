@@ -1,17 +1,9 @@
-package com.br.tinnova.model;
+package com.br.tinnova.model.dto;
 
-import com.br.tinnova.model.dto.CarRequestDTO;
-import jakarta.persistence.*;
+public class CarRequestDTO {
 
-@Entity(name = "tb_car")
-@Table(name = "tb_car")
-public class Car {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
     private String plate;
 
     private String model;
@@ -20,17 +12,16 @@ public class Car {
 
     private Double price;
 
-    @Column(name = "model_year")
     private Integer modelYear;
 
     private String color;
 
     private Boolean active;
 
-    public Car() {
+    public CarRequestDTO() {
     }
 
-    public Car(Long id, String plate, String model, String make, Double price, Integer modelYear, String color, Boolean active) {
+    public CarRequestDTO(Long id, String plate, String model, String make, Double price, Integer modelYear, String color, Boolean active) {
         this.id = id;
         this.plate = plate;
         this.model = model;
@@ -39,17 +30,6 @@ public class Car {
         this.modelYear = modelYear;
         this.color = color;
         this.active = active;
-    }
-
-    public Car(CarRequestDTO car) {
-        this.id = null;
-        this.plate = car.getPlate().toUpperCase();
-        this.model = car.getModel().toUpperCase();
-        this.make = car.getMake().toUpperCase();
-        this.price = car.getPrice();
-        this.modelYear = car.getModelYear();
-        this.color = car.getColor().toUpperCase();
-        this.active = true;
     }
 
     public Long getId() {
@@ -61,7 +41,7 @@ public class Car {
     }
 
     public String getPlate() {
-        return plate.toUpperCase();
+        return plate;
     }
 
     public void setPlate(String plate) {
@@ -69,7 +49,7 @@ public class Car {
     }
 
     public String getModel() {
-        return model.toUpperCase();
+        return model;
     }
 
     public void setModel(String model) {
@@ -77,7 +57,7 @@ public class Car {
     }
 
     public String getMake() {
-        return make.toUpperCase();
+        return make;
     }
 
     public void setMake(String make) {
@@ -101,7 +81,7 @@ public class Car {
     }
 
     public String getColor() {
-        return color.toUpperCase();
+        return color;
     }
 
     public void setColor(String color) {

@@ -1,36 +1,22 @@
-package com.br.tinnova.model;
+package com.br.tinnova.model.dto;
 
-import com.br.tinnova.model.dto.CarRequestDTO;
-import jakarta.persistence.*;
 
-@Entity(name = "tb_car")
-@Table(name = "tb_car")
-public class Car {
+import com.br.tinnova.model.Car;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CarDetailsDTO {
+
     private Long id;
-
-    @Column(unique = true)
-    private String plate;
-
     private String model;
-
     private String make;
-
+    private String plate;
     private Double price;
-
-    @Column(name = "model_year")
+    private String color;
     private Integer modelYear;
 
-    private String color;
-
-    private Boolean active;
-
-    public Car() {
+    public CarDetailsDTO() {
     }
 
-    public Car(Long id, String plate, String model, String make, Double price, Integer modelYear, String color, Boolean active) {
+    public CarDetailsDTO(Long id, String plate, String model, String make, Double price, Integer modelYear, String color) {
         this.id = id;
         this.plate = plate;
         this.model = model;
@@ -38,18 +24,16 @@ public class Car {
         this.price = price;
         this.modelYear = modelYear;
         this.color = color;
-        this.active = active;
     }
 
-    public Car(CarRequestDTO car) {
-        this.id = null;
-        this.plate = car.getPlate().toUpperCase();
-        this.model = car.getModel().toUpperCase();
-        this.make = car.getMake().toUpperCase();
+    public CarDetailsDTO(Car car) {
+        this.id = car.getId();
+        this.model = car.getModel();
+        this.make = car.getMake();
+        this.plate = car.getPlate();
         this.price = car.getPrice();
+        this.color = car.getColor();
         this.modelYear = car.getModelYear();
-        this.color = car.getColor().toUpperCase();
-        this.active = true;
     }
 
     public Long getId() {
@@ -61,7 +45,7 @@ public class Car {
     }
 
     public String getPlate() {
-        return plate.toUpperCase();
+        return plate;
     }
 
     public void setPlate(String plate) {
@@ -69,7 +53,7 @@ public class Car {
     }
 
     public String getModel() {
-        return model.toUpperCase();
+        return model;
     }
 
     public void setModel(String model) {
@@ -77,7 +61,7 @@ public class Car {
     }
 
     public String getMake() {
-        return make.toUpperCase();
+        return make;
     }
 
     public void setMake(String make) {
@@ -101,18 +85,10 @@ public class Car {
     }
 
     public String getColor() {
-        return color.toUpperCase();
+        return color;
     }
 
     public void setColor(String color) {
         this.color = color;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
     }
 }

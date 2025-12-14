@@ -1,9 +1,8 @@
 package com.br.tinnova.service;
 
 import com.br.tinnova.model.Car;
-import com.br.tinnova.model.dto.CarsCountByMakeDto;
+import com.br.tinnova.model.dto.*;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -12,19 +11,21 @@ import java.util.Optional;
 
 public interface CarService {
 
-    Page<Car> findAll(Pageable pageable);
+    Page<CarResponseDTO> findAll(Pageable pageable);
 
-    Page<List<Car>> findCarsByMakeAndYearAndColor(String make, String year, String color);
+    Page<CarResponseDTO> findCarsByMakeAndModelYearAndColor(String make, String year, String color, Pageable pageable);
 
-    Optional<Car> getOneCar(Long id);
+    Optional<CarDetailsDTO> getOneCar(Long id);
 
-    Car save(Car car);
+    CarDetailsDTO save(CarRequestDTO car) throws Exception;
 
-    Car update(Car car);
+    CarDetailsDTO update(CarRequestDTO car);
 
-    Car delete(Long id);
+    CarsCountByMakeDTO countCarsByMake(String make);
 
-    Page<List<CarsCountByMakeDto>> countCarsByMake();
+    Page<CarResponseDTO> filterCarsByPrice(Double minPrice, Double maxPrice, Pageable pageable);
 
-    Page<List<Car>> filterCarsByPrice(Double minPrice, Double maxPrice);
+    void delete(CarDetailsDTO car);
+
+    CarDetailsDTO patchUpdate(CarPatchRequestDTO car);
 }
